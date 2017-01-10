@@ -81,16 +81,12 @@ namespace ARevillaSearchFight
             this.Output.WriteLine($"Total Winner:  {  results.GroupBy(o => o.Term).Select(grouping => new { Term = grouping.Key, Total = grouping.Sum(o => o.Count()) }).OrderByDescending(o => o.Total).First().Total  }");
         }
 
-        public static object[,] BuildMatrix(SearchResults[] collection, SearchResultsMatrixOptions options)
+        public static object[,] BuildMatrix(SearchResults[] collection)
         {
 
             if (collection == null)
             {
                 throw new ArgumentNullException(nameof(collection));
-            }
-            if (options == SearchResultsMatrixOptions.TermsAsHeaders)
-            {
-                throw new NotSupportedException("Terms as headers are not (yet) supported");
             }
 
             //  y
@@ -123,8 +119,3 @@ namespace ARevillaSearchFight
 
 }
 
-public enum SearchResultsMatrixOptions
-{
-    EnginesAsHeaders = 0,
-    TermsAsHeaders = 1,
-}

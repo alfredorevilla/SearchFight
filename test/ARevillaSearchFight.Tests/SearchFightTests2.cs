@@ -49,7 +49,7 @@ namespace ARevillaSearchFight.Tests
                 new SearchResults(engine3, ".net", A.CollectionOfFake<SearchResultItem>(200)),
                 new SearchResults(engine3, "java", A.CollectionOfFake<SearchResultItem>(300))
             };
-            var matrix = SearchFight.BuildMatrix(result, SearchResultsMatrixOptions.EnginesAsHeaders);
+            var matrix = SearchFight.BuildMatrix(result);
 
 
             int y = 0, x = 0;
