@@ -1,61 +1,46 @@
-﻿//using ARevillaSearchFight.Models;
-//using FakeItEasy;
-//using FluentAssertions;
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading.Tasks;
-//using Xunit;
-//using Xunit.Abstractions;
+﻿using FluentAssertions;
+using FakeItEasy;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Xunit;
+using ARevillaSearchFight.Models;
 
-//namespace ARevillaSearchFight.Tests
-//{
-//    public class SearchFightTests
-//    {
+namespace ARevillaSearchFight.Tests
+{
+    public class SearchFightTests
+    {
 
-//        ISearchEngine _engine1;
-//        IOutput _output;
+        [Fact]
+        public void ReulstingMatrixShouldContainAllGivenSearchTermsOnce()
+        {
+            //  arrange
+            var engine1 = A.Fake<ISearchEngine>();
+            A.CallTo(() => engine1.Name).Returns(nameof(engine1));
+            var engine2 = A.Fake<ISearchEngine>();
+            A.CallTo(() => engine2.Name).Returns(nameof(engine2));
+            var engine3 = A.Fake<ISearchEngine>();
+            A.CallTo(() => engine3.Name).Returns(nameof(engine3));
+            var terms = new[] { ".net", "java" };
+            var result = new SearchResults[] {
+                new SearchResults(engine1, ".net", A.CollectionOfFake<SearchResultItem>(100)),
+                new SearchResults(engine1, "java", A.CollectionOfFake<SearchResultItem>(150)),
+                new SearchResults(engine2, ".net", A.CollectionOfFake<SearchResultItem>(200)),
+                new SearchResults(engine2, "java", A.CollectionOfFake<SearchResultItem>(300)),
+                new SearchResults(engine3, ".net", A.CollectionOfFake<SearchResultItem>(200)),
+                new SearchResults(engine3, "java", A.CollectionOfFake<SearchResultItem>(300))
+            };
 
-//        public SearchFightTests()
-//        {
-//            _engine1 = A.Fake<ISearchEngine>();
-//            A.CallTo(() => _engine1.Search("")).WithAnyArguments().Returns(new SearchResult(new SearchResultItem[0] { }));
-//            _output = A.Fake<IOutput>();
-//            A.CallTo(() => _output.WriteLine("")).WithAnyArguments().Invokes((fake) => Console.WriteLine(fake.GetArgument<string>(0)));
-//            var instance = new SearchFight(new[] { _engine1 }, _output);
-//        }
+            //  act
+            var matrix = SearchFight.BuildTermPerEngineSearchResultCountMatrix(result);
 
-//        [Fact]
-//        public void Search()
-//        {
-//            //  arrange
-//            var engine1 = A.Fake<ISearchEngine>();
-//            A.CallTo(() => engine1.Search("")).WithAnyArguments().Returns(new SearchResult(new SearchResultItem[0] { }));
-//            var output = A.Fake<IOutput>();
-//            A.CallTo(() => output.WriteLine("")).WithAnyArguments().Invokes((fake) => Console.WriteLine(fake.GetArgument<string>(0)));
-//            var instance = new SearchFight(new[] { engine1 }, output);
-//            var terms = new[] { "cignium", "street fighter" };
+            //  assert
+            int y = 0, x = 0;
+            matrix[0, 0].Should().BeNull();
+            terms.Should().Contain(matrix[++y, x].ToString());
+            terms.Should().Contain(matrix[++y, x].ToString());
 
-//            //  act
-//            var result = instance.Fight(terms);
-
-//            //  assert
-//            result.Should().HaveCount(terms.Length);
-//        }
-
-//        [Fact]
-//        public void SearchWontAcceptNullOrZeroTerms()
-//        {
-//            //  arrange
-//            var instance = new SearchFight(new[] { _engine1 }, _output);
-
-//            //  act
-//            var a = this.Invoking((o) => instance.Fight(null));
-//            var a2 = this.Invoking((o) => instance.Fight(new string[] { }));
-
-//            //  assert
-//            a.ShouldThrow<ArgumentException>();
-//            a2.ShouldThrow<ArgumentException>();
-//        }
-//    }
-//}
+        }
+    }
+}
