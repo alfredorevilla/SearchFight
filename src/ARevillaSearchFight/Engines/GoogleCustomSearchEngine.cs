@@ -14,7 +14,12 @@ namespace ARevillaSearchFight.Engines
             get { return nameof(GoogleCustomSearchEngine); }
         }
 
-        public SearchResults Search(string term)
+        public int GetSearchTotalCount(string term)
+        {
+            throw new NotImplementedException();
+        }
+
+        public SearchResults Search(string term, int offset, int maxResults)
         {
             throw new NotImplementedException();
         }
