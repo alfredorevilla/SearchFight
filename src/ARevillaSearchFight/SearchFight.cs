@@ -8,7 +8,6 @@ namespace ARevillaSearchFight
 {
     public class SearchFight
     {
-
         public SearchFight(IEnumerable<ISearchEngine> searchEngines, IOutput output)
         {
             if (searchEngines == null)
@@ -49,7 +48,7 @@ namespace ARevillaSearchFight
             {
                 foreach (var item2 in this.SearchEngines)
                 {
-                    results[i++] = item2.Search(item1);
+                    //results[i++] = item2.Search(item1);
                 }
             }
 
@@ -78,7 +77,7 @@ namespace ARevillaSearchFight
             {
                 foreach (var item2 in this.SearchEngines)
                 {
-                    results[i++] = item2.Search(item1);
+
                 }
             }
 
@@ -89,7 +88,7 @@ namespace ARevillaSearchFight
             foreach (var item in terms)
             {
                 var results2 = results.Where(o => o.Term.Equals(item, StringComparison.CurrentCultureIgnoreCase));
-                var line1 = this.SearchEngines.Select(o => new { EngineName = o.Name, Total = results2.Single(o2 => o2.SearchEngine == o).Count() });
+                var line1 = this.SearchEngines.Select(o => new { EngineName = o.GetName(), Total = results2.Single(o2 => o2.SearchEngine == o).Count() });
                 var str = $"{item}: " + string.Join(" ", line1.Select(o => $"{o.EngineName}: {o.Total}"));
                 this.Output.WriteLine(str);
             }
@@ -117,7 +116,7 @@ namespace ARevillaSearchFight
             //  y
             var terms = collection.Select(o => o.Term);//.Distinct();
             //  x
-            var engines = collection.Select(o => o.SearchEngine.Name);//;.Distinct();
+            var engines = collection.Select(o => o.SearchEngine.GetName());//;.Distinct();
             var matrix = new object[terms.Count() + 1, engines.Count() + 1];
             matrix[0, 0] = null;
             for (int x = 1; x < matrix.GetLength(0); x++)
@@ -132,7 +131,7 @@ namespace ARevillaSearchFight
             {
                 for (int x = 1; x < matrix.GetLength(0); x++)
                 {
-                    matrix[y, x] = collection.Single(o => o.Term.Equals((string)matrix[y, 0], StringComparison.CurrentCultureIgnoreCase) && o.SearchEngine.Name.Equals((string)matrix[0, x], StringComparison.CurrentCultureIgnoreCase)).Count();
+                    matrix[y, x] = collection.Single(o => o.Term.Equals((string)matrix[y, 0], StringComparison.CurrentCultureIgnoreCase) && o.SearchEngine.GetName().Equals((string)matrix[0, x], StringComparison.CurrentCultureIgnoreCase)).Count();
                 }
             }
             return matrix;
