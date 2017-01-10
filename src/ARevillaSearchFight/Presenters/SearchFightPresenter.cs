@@ -27,7 +27,6 @@ namespace ARevillaSearchFight.Presenters
                 this.View.RenderWarningList(titleOrCategory: "Validation errors", items: validationErrors);
                 return;
             }
-
             this.View.RenderSearchAndFightData(data: new Views.Models.SearchAndFightData
             {
                 TotalResultsPerTermPerEngine = this.Model.GetResultsCountPerTermPerEngine(terms: e.Terms),

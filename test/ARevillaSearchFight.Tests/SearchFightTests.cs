@@ -17,11 +17,11 @@ namespace ARevillaSearchFight.Tests
         {
             //  arrange
             var engine1 = A.Fake<ISearchEngine>();
-            A.CallTo(() => engine1.Name).Returns(nameof(engine1));
+            A.CallTo(() => engine1.GetName()).Returns(nameof(engine1));
             var engine2 = A.Fake<ISearchEngine>();
-            A.CallTo(() => engine2.Name).Returns(nameof(engine2));
+            A.CallTo(() => engine2.GetName()).Returns(nameof(engine2));
             var engine3 = A.Fake<ISearchEngine>();
-            A.CallTo(() => engine3.Name).Returns(nameof(engine3));
+            A.CallTo(() => engine3.GetName()).Returns(nameof(engine3));
             var terms = new[] { ".net", "java" };
             var result = new SearchResults[] {
                 new SearchResults(engine1, ".net", A.CollectionOfFake<SearchResultItem>(100)),
