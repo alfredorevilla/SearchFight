@@ -13,7 +13,7 @@ namespace ARevillaSearchFight.Tests
     {
 
         [Fact]
-        public void ReulstingMatrixShouldContainAllGivenSearchTermsOnce()
+        public void ResultingMatrixShouldContainAllGivenSearchTermsOnce()
         {
             //  arrange
             var engine1 = A.Fake<ISearchEngine>();

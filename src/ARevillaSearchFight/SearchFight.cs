@@ -8,7 +8,7 @@ namespace ARevillaSearchFight
 {
     public class SearchFight
     {
-        public SearchFight(IEnumerable<ISearchEngine> searchEngines, IOutput output)
+            public SearchFight(IEnumerable<ISearchEngine> searchEngines, IOutput output)
         {
             if (searchEngines == null)
             {

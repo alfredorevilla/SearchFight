@@ -1,8 +1,7 @@
-﻿using System;
+﻿using ARevillaSearchFight.Views.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using ARevillaSearchFight.Views.Models;
 
 namespace ARevillaSearchFight.Models.Implementations
 {
@@ -17,13 +16,8 @@ namespace ARevillaSearchFight.Models.Implementations
 
         public string GetOverallWinnerTerm(string[] terms)
         {
-            var results = this.Search(terms);
-
-            return null;
+            throw new NotImplementedException();
         }
-
-
-
 
         public ResultCountPerTermPerEngine[] GetResultsCountPerTermPerEngine(string[] terms)
         {
@@ -31,11 +25,6 @@ namespace ARevillaSearchFight.Models.Implementations
         }
 
         public WinnerTermPerEngine[] GetWinnersTermsPerSearchEngine(string[] terms)
-        {
-            throw new NotImplementedException();
-        }
-
-        public SearchResults[] Search(string[] terms)
         {
             throw new NotImplementedException();
         }
@@ -49,7 +38,6 @@ namespace ARevillaSearchFight.Models.Implementations
             }
             else
             {
-
             }
             validationErrors = errors.ToArray();
             return validationErrors.Any();

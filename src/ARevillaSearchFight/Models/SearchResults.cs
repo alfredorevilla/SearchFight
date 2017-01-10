@@ -7,6 +7,8 @@ namespace ARevillaSearchFight.Models
 {
     public class SearchResults : IEnumerable<SearchResultItem>
     {
+        public bool TotalResults { get; }
+
         private SearchResultItem[] _items;
 
         public SearchResults(ISearchEngine engine, string term, IEnumerable<SearchResultItem> items)
@@ -33,7 +35,7 @@ namespace ARevillaSearchFight.Models
 
         public string Term { get; }
 
-        
+
         public IEnumerator<SearchResultItem> GetEnumerator()
         {
             return ((IEnumerable<SearchResultItem>)this._items).GetEnumerator();
