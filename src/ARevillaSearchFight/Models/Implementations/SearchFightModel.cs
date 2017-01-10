@@ -10,15 +10,20 @@ namespace ARevillaSearchFight.Models.Implementations
     {
         public SearchFightModel(IEnumerable<ISearchEngine> engines)
         {
-            this.Engines = engines;
+            this.Engines = engines.ToArray();
         }
 
-        public IEnumerable<ISearchEngine> Engines { get; }
+        public ISearchEngine[] Engines { get; }
 
         public string GetOverallWinnerTerm(string[] terms)
         {
-            throw new NotImplementedException();
+            var results = this.Search(terms);
+
+            return null;
         }
+
+
+
 
         public ResultCountPerTermPerEngine[] GetResultsCountPerTermPerEngine(string[] terms)
         {
@@ -30,9 +35,24 @@ namespace ARevillaSearchFight.Models.Implementations
             throw new NotImplementedException();
         }
 
-        public bool ValidateTerms(string[] terms, out string[] validationErrors)
+        public SearchResults[] Search(string[] terms)
         {
             throw new NotImplementedException();
+        }
+
+        public bool ValidateTerms(string[] terms, out string[] validationErrors)
+        {
+            List<string> errors = new List<string>();
+            if (terms == null || terms.Count() < 2)
+            {
+                errors.Add("You must send at least 2 terms");
+            }
+            else
+            {
+
+            }
+            validationErrors = errors.ToArray();
+            return validationErrors.Any();
         }
     }
 }
