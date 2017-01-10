@@ -1,10 +1,10 @@
-﻿using ARevillaSearchFight.Engines.BingSearch.Models;
+﻿using ARevillaSearchFight.Engines.Microsoft.Models;
 using ARevillaSearchFight.Models;
 using Newtonsoft.Json;
 using System;
 using System.Net.Http;
 
-namespace ARevillaSearchFight.Engines.BingSearch
+namespace ARevillaSearchFight.Engines.Microsoft
 {
     [SearchEngineMetadata("Bing")]
     public class BingSearchEngine : ISearchEngine

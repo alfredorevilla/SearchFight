@@ -1,27 +1,30 @@
 ﻿using FluentAssertions;
+using ARevillaSearchFight.Engines.Google;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
-using ARevillaSearchFight.Engines.Microsoft;
 
 namespace ARevillaSearchFight.Tests
 {
-    public class BingSearchEngineTests
+    public class GoogleCustomSearchEngineTests
     {
-        BingSearchEngine _engine;
-        public BingSearchEngineTests()
+
+        GoogleCustomSearchEngine _engine;
+
+        public GoogleCustomSearchEngineTests()
         {
-            _engine = new BingSearchEngine();
-            
+            _engine = new GoogleCustomSearchEngine();
         }
 
         [Fact]
         public void GetBillGatesSearchTotalCountShouldReturnMoreThanZero()
         {
+            //  act
             var total = _engine.GetSearchTotalCount("bill gates");
 
+            //  assert
             total.Should().BeGreaterThan(0);
         }
     }
