@@ -55,8 +55,9 @@ namespace ARevillaSearchFight
                     results[i++] = item2.Search(item1);
                 }
             }
+
             //  terms engines search results
-            //  Excepted output:
+            //  Expected output:
             //  .net: Google: 4450000000 MSN Search: 12354420
             //  java: Google: 966000000 MSN Search: 94381485
             foreach (var item in terms)
@@ -66,7 +67,8 @@ namespace ARevillaSearchFight
                 var str = $"{item}: " + string.Join(" ", line1.Select(o => $"{o.EngineName}: {o.Total}"));
                 this.Output.WriteLine(str);
             }
-            //  Excepted output:
+
+            //  Expected output:
             //  Google winner: .net
             //  MSN Search winner: java
             foreach (var item in this.SearchEngines)
@@ -74,9 +76,55 @@ namespace ARevillaSearchFight
                 this.Output.WriteLine($"{item} winner: {   results.Where(o => o.SearchEngine == item).Select(o => new { Term = o.Term, Total = o.Count() })}");
             }
 
-            //  Excepted output:
+            //  Expected output:
             //  Total winner: .net
             this.Output.WriteLine($"Total Winner:  {  results.GroupBy(o => o.Term).Select(grouping => new { Term = grouping.Key, Total = grouping.Sum(o => o.Count()) }).OrderByDescending(o => o.Total).First().Total  }");
         }
+
+        public static object[,] BuildMatrix(SearchResults[] collection, SearchResultsMatrixOptions options)
+        {
+
+            if (collection == null)
+            {
+                throw new ArgumentNullException(nameof(collection));
+            }
+            if (options == SearchResultsMatrixOptions.TermsAsHeaders)
+            {
+                throw new NotSupportedException("Terms as headers are not (yet) supported");
+            }
+
+            //  y
+            var terms = collection.Select(o => o.Term);//.Distinct();
+            //  x
+            var engines = collection.Select(o => o.SearchEngine.Name);//;.Distinct();
+            var matrix = new object[terms.Count() + 1, engines.Count() + 1];
+            matrix[0, 0] = null;
+            for (int x = 1; x < matrix.GetLength(0); x++)
+            {
+                matrix[0, x] = engines.ElementAt(x - 1);
+            }
+            for (int y = 1; y < matrix.GetLength(1); y++)
+            {
+                matrix[y, 0] = terms.ElementAt(y - 1);
+            }
+            for (int y = 1; y < matrix.GetLength(1); y++)
+            {
+                for (int x = 1; x < matrix.GetLength(0); x++)
+                {
+                    matrix[y, x] = collection.Single(o => o.Term.Equals((string)matrix[y, 0], StringComparison.CurrentCultureIgnoreCase) && o.SearchEngine.Name.Equals((string)matrix[0, x], StringComparison.CurrentCultureIgnoreCase)).Count();
+                }
+            }
+
+            return matrix;
+
+        }
+
     }
+
+}
+
+public enum SearchResultsMatrixOptions
+{
+    EnginesAsHeaders = 0,
+    TermsAsHeaders = 1,
 }

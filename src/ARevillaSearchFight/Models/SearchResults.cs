@@ -9,7 +9,7 @@ namespace ARevillaSearchFight.Models
     {
         private SearchResultItem[] _items;
 
-        public SearchResults(ISearchEngine engine, string term, IEnumerable<SearchResultItem> items, TimeSpan timeTaken)
+        public SearchResults(ISearchEngine engine, string term, IEnumerable<SearchResultItem> items)
         {
             if (engine == null)
             {
@@ -27,15 +27,13 @@ namespace ARevillaSearchFight.Models
             this.SearchEngine = engine;
             this.Term = term;
             this._items = items.ToArray();
-            this.TimeTaken = timeTaken;
         }
 
         public ISearchEngine SearchEngine { get; }
 
         public string Term { get; }
 
-        public TimeSpan TimeTaken { get; set; }
-
+        
         public IEnumerator<SearchResultItem> GetEnumerator()
         {
             return ((IEnumerable<SearchResultItem>)this._items).GetEnumerator();
