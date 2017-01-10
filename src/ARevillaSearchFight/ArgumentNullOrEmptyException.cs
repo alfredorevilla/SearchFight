@@ -7,7 +7,7 @@ namespace ARevillaSearchFight
 {
     public sealed class ArgumentNullOrEmptyException : ArgumentException
     {
-        public ArgumentNullOrEmptyException(string name) : base(name)
+        public ArgumentNullOrEmptyException(string name) : base("Argument cannot be null or empty", name)
         {
         }
 

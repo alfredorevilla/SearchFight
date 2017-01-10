@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ARevillaSearchFight
 {
     /// <summary>
-    /// Represents a search engine
+    /// Represents a search engine. 
     /// </summary>
     public interface ISearchEngine
     {
@@ -20,7 +20,7 @@ namespace ARevillaSearchFight
         /// Search method
         /// </summary>
         /// <param name="term">The term to search for</param>
-        /// <returns>A <paramref name="SearchResults"/> object results collection</returns>
+        /// <returns cref="SearchResults">A SearchResults object</returns>
         /// <exception cref="System.ArgumentNullException"></exception>
         SearchResults Search(string term);
     }

@@ -8,6 +8,7 @@ namespace ARevillaSearchFight
 {
     public class SearchFight
     {
+
         public SearchFight(IEnumerable<ISearchEngine> searchEngines, IOutput output)
         {
             if (searchEngines == null)
@@ -27,8 +28,33 @@ namespace ARevillaSearchFight
             this.SearchEngines = searchEngines.ToArray();
         }
 
-        public IOutput Output { get; }
         public ISearchEngine[] SearchEngines { get; }
+        public IOutput Output { get; }
+
+        public SearchResults[] Search(string[] terms)
+        {
+            if (terms == null)
+            {
+                throw new ArgumentNullException(nameof(terms));
+            }
+            terms = terms.Select(o => StringHelper.RemoveExtraWhitespaces(o)).Distinct(StringComparer.CurrentCultureIgnoreCase).ToArray();
+            if (terms.Count() <= 1)
+            {
+                throw new ArgumentException($"At least 2 non equal terms are required", nameof(terms));
+            }
+
+            var results = new SearchResults[this.SearchEngines.Length * terms.Length];
+            var i = 0;
+            foreach (var item1 in terms)
+            {
+                foreach (var item2 in this.SearchEngines)
+                {
+                    results[i++] = item2.Search(item1);
+                }
+            }
+
+            return results;
+        }
 
         /// <summary>
         /// Searches for 2 or more non-equal terms using 2 or more search engines
@@ -81,9 +107,8 @@ namespace ARevillaSearchFight
             this.Output.WriteLine($"Total Winner:  {  results.GroupBy(o => o.Term).Select(grouping => new { Term = grouping.Key, Total = grouping.Sum(o => o.Count()) }).OrderByDescending(o => o.Total).First().Total  }");
         }
 
-        public static object[,] BuildMatrix(SearchResults[] collection)
+        public static object[,] BuildTermPerEngineSearchResultCountMatrix(SearchResults[] collection)
         {
-
             if (collection == null)
             {
                 throw new ArgumentNullException(nameof(collection));
@@ -110,7 +135,6 @@ namespace ARevillaSearchFight
                     matrix[y, x] = collection.Single(o => o.Term.Equals((string)matrix[y, 0], StringComparison.CurrentCultureIgnoreCase) && o.SearchEngine.Name.Equals((string)matrix[0, x], StringComparison.CurrentCultureIgnoreCase)).Count();
                 }
             }
-
             return matrix;
 
         }

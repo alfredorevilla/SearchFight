@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ARevillaSearchFight
 {
+    /// <summary>
+    /// Just a <seealso cref="System.String"/> helper
+    /// </summary>
     public static class StringHelper
     {
         /// <summary>
