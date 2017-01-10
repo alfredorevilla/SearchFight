@@ -4,11 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ARevillaSearchFight.Data
+namespace ARevillaSearchFight.Models
 {
-    public class BasicTable : IEnumerable<BasicRow>
+    public class FightSearchResults : IEnumerable<SearchResults>
     {
-        public IEnumerator<BasicRow> GetEnumerator()
+        IEnumerable<ISearchEngine> SearchEngines { get; }
+
+        IEnumerable<string> Terms { get; set; }
+
+        public IEnumerator<SearchResults> GetEnumerator()
         {
             throw new NotImplementedException();
         }
