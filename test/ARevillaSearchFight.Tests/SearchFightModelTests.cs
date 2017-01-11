@@ -2,20 +2,33 @@
 using ARevillaSearchFight.Search;
 using FakeItEasy;
 using FluentAssertions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using Xunit;
 
 namespace ARevillaSearchFight.Tests
 {
     public class SearchFightModelTests
     {
-        private IEnumerable<ISearchEngine> _engines;
+        //private IEnumerable<ISearchEngine> _engines;
+        ISearchEngine _engine1;
+        ISearchEngine _engine2;
+        ISearchEngine _engine3;
         private SearchFightModel _model;
         public SearchFightModelTests()
         {
             //  arrange
-            _engines = A.CollectionOfFake<Search.ISearchEngine>(3);
+            Expression<Func<Attribute>> att1 = () => new SearchEngineMetadataAttribute(nameof(_engine1), "");
+            _engine1 = A.Fake<ISearchEngine>(options => options.WithAttributes(att1));
+            Expression<Func<Attribute>> att2 = () => new SearchEngineMetadataAttribute(nameof(_engine2), "");
+            _engine2 = A.Fake<ISearchEngine>(options => options.WithAttributes(att2));
+            Expression<Func<Attribute>> att3 = () => new SearchEngineMetadataAttribute(nameof(_engine3), "");
+            _engine3 = A.Fake<ISearchEngine>(options => options.WithAttributes(att3));
+
+            var _engines = new[] { _engine1, _engine2, _engine3 };
+
             A.CallTo(() => _engines.ElementAt(0).GetSearchTotalCount(".net")).Returns(100);
             A.CallTo(() => _engines.ElementAt(0).GetSearchTotalCount(".java")).Returns(55);
             A.CallTo(() => _engines.ElementAt(1).GetSearchTotalCount(".net")).Returns(150);

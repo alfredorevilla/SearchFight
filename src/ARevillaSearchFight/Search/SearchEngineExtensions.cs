@@ -21,15 +21,16 @@ namespace ARevillaSearchFight.Search
         /// <returns></returns>
         public static string GetName<T>(this T engine) where T : ISearchEngine
         {
-            var t = typeof(T);
+            var t = engine.GetType();// typeof(T);
             if (!_names.ContainsKey(t))
             {
                 lock (((ICollection)_names).SyncRoot)
                 {
                     if (!_names.ContainsKey(t))
                     {
-                        var name = typeof(T).GetTypeInfo().CustomAttributes.OfType<SearchEngineMetadataAttribute>().SingleOrDefault()?.Name;
-                        _names.Add(t, name ?? typeof(T).Name);
+                        //  hackish fix for fakeiteasy
+                        var name = t.GetTypeInfo().GetCustomAttribute<SearchEngineMetadataAttribute>(t.Name.Equals("ObjectProxy") ? true : false)?.Name;
+                        _names.Add(t, name ?? t.Name);
                     }
                 }
             }
