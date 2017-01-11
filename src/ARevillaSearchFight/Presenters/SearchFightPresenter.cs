@@ -14,15 +14,17 @@ namespace ARevillaSearchFight.Presenters
         {
             this.View = view;
             this.Model = model;
-
-            this.View.SearchAndFight += View_SearchAndFight;
-
         }
 
         private void View_SearchAndFight(object sender, SearchAndFightArgs e)
         {
+            this.SearchAndFight(e.Terms);
+        }
+
+        public void SearchAndFight(string[] terms)
+        {
             string[] validationErrors;
-            if (!this.Model.ValidateTerms(terms: e.Terms, validationErrors: out validationErrors))
+            if (!this.Model.ValidateTerms(terms: terms, validationErrors: out validationErrors))
             {
                 this.View.RenderWarningList(titleOrCategory: "Validation errors", items: validationErrors);
                 return;
@@ -34,7 +36,6 @@ namespace ARevillaSearchFight.Presenters
                 OverallWinnerTerm = this.Model.GetOverallWinnerTerm(terms: e.Terms),
             });
         }
-
 
         public ISearchFightView View { get; }
         public ISearchFightModel Model { get; }

@@ -24,6 +24,7 @@ namespace ARevillaSearchFight
             var provider = services.BuildServiceProvider();
 
             var presenter = provider.GetRequiredService<SearchFightPresenter>();
+            presenter.SearchAndFight(terms: args);
         }
     }
 }
