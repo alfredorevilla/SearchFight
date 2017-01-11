@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace ARevillaSearchFight.Tests
 {
@@ -19,48 +20,61 @@ namespace ARevillaSearchFight.Tests
 
         public SearchFightPresenterTests()
         {
-            _view = A.Fake<ISearchFightView>();            
+            _view = A.Fake<ISearchFightView>();
             _model = A.Fake<ISearchFightModel>();
             _presenter = new SearchFightPresenter(_view, _model);
         }
 
-        public void Test1()
+        [Fact]
+        public void SearchAndFightTest()
         {
-
-            A.CallTo(() => _model.GetTermSearchResults(new string[] { })).WithAnyArguments().Returns(new []
+            //  arrange
+            A.CallTo(() => _model.GetTermSearchResults(new string[] { })).WithAnyArguments().Returns(new[]
             {
-                new TermSearchResult
+                new ModelTermSearchResult
                 {
                     Count = 100,
                     SearchEngineName = "engine1",
                     Term = "java"
                 },
-                new TermSearchResult
+                new ModelTermSearchResult
                 {
                     Count = 150,
                     SearchEngineName = "engine2",
                     Term = "java"
                 },
-                new TermSearchResult
+                new ModelTermSearchResult
                 {
-                    Count = 100,
-                    SearchEngineName = ".net",
-                    Term = "java"
+                    Count = 130,
+                    SearchEngineName = "engine1",
+                    Term = ".net"
                 },
-                new TermSearchResult
+                new ModelTermSearchResult
                 {
-                    Count = 150,
-                    SearchEngineName = ".net",
-                    Term = "java"
+                    Count = 170,
+                    SearchEngineName = "engine2",
+                    Term = ".net"
                 }
             });
 
             var terms = new[] { "java", ".net" };
+
+            //  act
             _presenter.SearchAndFight(terms);
 
             //  assert
-            //A.CallTo(() => _view.RenderSearchAndFightData(null)).WhenArgumentsMatch()
-            
+            A.CallTo(() => _view.RenderSearchAndFightData(null)).WithAnyArguments()
+                .Invokes(fake =>
+                {
+                    var model = fake.GetArgument<SearchAndFightModel>(0);
+                    model.OverallWinnerTerm.Should().Be(".net");
+                    model.SearchResults.Count().Should().Be(4);
+                    model.SearchResults.Select(o => o.SearchEngineName).Distinct().Count().Should().Be(2);
+                    model.SearchResults.Select(o => o.Term).Distinct().Count().Should().Be(2);
+                    model.WinnerTerms.Count().Should().Be(2);
+                    model.WinnerTerms.Select(o => o.Term).Distinct().Count().Should().Be(2);
+                    model.WinnerTerms.Select(o => o.Term).Distinct().Count().Should().Be(2);
+                });
         }
     }
 }

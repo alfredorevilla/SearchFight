@@ -33,7 +33,7 @@ namespace ARevillaSearchFight.Presenters
                 SearchEngineName = model.SearchEngineName,
                 Term = model.Term
             }).ToArray();
-            this.View.RenderSearchAndFightData(data: new Views.Models.SearchAndFightModel
+            this.View.RenderSearchAndFightData(new Views.Models.SearchAndFightModel
             {
                 SearchResults = results,
                 WinnerTerms = winners,

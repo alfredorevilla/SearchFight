@@ -13,6 +13,6 @@ namespace ARevillaSearchFight.Views
 
         void RenderWarningList(string titleOrCategory, string[] items);
 
-        void RenderSearchAndFightData(SearchAndFightModel data);
+        void RenderSearchAndFightData(SearchAndFightModel model);
     }
 }

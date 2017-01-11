@@ -9,30 +9,31 @@ namespace ARevillaSearchFight.Models.Implementations
     {
         public SearchFightModel(IEnumerable<ISearchEngine> engines)
         {
-            this.SearchEngines = engines.ToArray();
+            this._engines = engines.ToArray();
         }
 
-        public ISearchEngine[] SearchEngines { get; }
+        public ISearchEngine[] _engines;
 
         public ModelTermSearchResult[] GetTermSearchResults(string[] terms)
         {
-            var array = new ModelTermSearchResult[terms.Length * this.SearchEngines.Length];
-            for (var i = 0; i < terms.Length;)
+            var array = new ModelTermSearchResult[terms.Length * this._engines.Length];
+            var i = 0;
+            foreach (var term in terms)
             {
-                foreach (var engine in this.SearchEngines)
+                foreach (var engine in _engines)
                 {
-                    array[i] = new ModelTermSearchResult
+                    array[i++] = new ModelTermSearchResult
                     {
-                        Count = engine.GetSearchTotalCount(terms[i]),
+                        Count = engine.GetSearchTotalCount(term),
                         SearchEngineName = engine.GetName(),
-                        Term = terms[i++]
+                        Term = term
                     };
                 }
             }
             return array;
         }
 
-            public bool TryValidateTerms(string[] terms, out string[] validationErrors)
+        public bool TryValidateTerms(string[] terms, out string[] validationErrors)
         {
             List<string> errors = new List<string>();
             if (terms == null || (terms = terms.Select(o => StringHelper.RemoveExtraWhitespaces(o)).ToArray()).Count() < 2)
