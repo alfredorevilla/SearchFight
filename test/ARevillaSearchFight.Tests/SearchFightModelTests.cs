@@ -46,5 +46,53 @@ namespace ARevillaSearchFight.Tests
             results.Select(o => o.Term).Distinct().Count().Should().Be(2);
             results.Select(o => o.Count).Sum().Should().Be(100 + 55 + 150 + 23 + 78 + 455);
         }
+
+        [Fact]
+        public void TryValidateTerms1()
+        {
+            //  arrange
+            _model = new SearchFightModel(new[] { _engine1, _engine2, _engine3 });
+
+            //  act
+            string[] validationErrors;
+            _model.TryValidateTerms(null, out validationErrors).Should().BeFalse();
+            validationErrors.Should().ContainSingle();
+        }
+
+        [Fact]
+        public void TryValidateTerms2()
+        {
+            //  arrange
+            _model = new SearchFightModel(new[] { _engine1, _engine2, _engine3 });
+
+            //  act
+            string[] validationErrors;
+            _model.TryValidateTerms(new[] { ".net" }, out validationErrors).Should().BeFalse();
+            validationErrors.Should().ContainSingle();
+        }
+
+        [Fact]
+        public void TryValidateTerms3()
+        {
+            //  arrange
+            _model = new SearchFightModel(new[] { _engine1, _engine2, _engine3 });
+
+            //  act
+            string[] validationErrors;
+            _model.TryValidateTerms(new[] { ".net", ".Net" }, out validationErrors).Should().BeFalse();
+            validationErrors.Should().ContainSingle();
+        }
+
+        [Fact]
+        public void TryValidateTerms4()
+        {
+            //  arrange
+            _model = new SearchFightModel(new[] { _engine1, _engine2, _engine3 });
+
+            //  act
+            string[] validationErrors;
+            _model.TryValidateTerms(new[] { ".net", "java" }, out validationErrors).Should().BeTrue();
+            validationErrors.Should().BeEmpty();
+        }
     }
 }

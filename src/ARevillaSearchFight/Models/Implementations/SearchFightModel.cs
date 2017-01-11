@@ -1,5 +1,6 @@
 ﻿using ARevillaSearchFight.Search;
 using ARevillaSearchFight.Views.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -36,12 +37,12 @@ namespace ARevillaSearchFight.Models.Implementations
         public bool TryValidateTerms(string[] terms, out string[] validationErrors)
         {
             List<string> errors = new List<string>();
-            if (terms == null || (terms = terms.Select(o => StringHelper.RemoveExtraWhitespaces(o)).ToArray()).Count() < 2)
+            if (terms == null || (terms = terms.Select(o => StringHelper.RemoveExtraWhitespaces(o)).ToArray()).Distinct(StringComparer.CurrentCultureIgnoreCase).Count() < 2)
             {
                 errors.Add("At least 2 non equal terms are required");
             }
             validationErrors = errors.ToArray();
-            return validationErrors.Any();
+            return !validationErrors.Any();
         }
     }
 }
