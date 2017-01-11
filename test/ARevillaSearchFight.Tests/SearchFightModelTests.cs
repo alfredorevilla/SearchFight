@@ -22,20 +22,19 @@ namespace ARevillaSearchFight.Tests
             _engine1 = A.Fake<ISearchEngine>(options => options.WithAttributes(() => new SearchEngineMetadataAttribute(nameof(_engine1), "")));
             _engine2 = A.Fake<ISearchEngine>(options => options.WithAttributes(() => new SearchEngineMetadataAttribute(nameof(_engine2), "")));
             _engine3 = A.Fake<ISearchEngine>(options => options.WithAttributes(() => new SearchEngineMetadataAttribute(nameof(_engine3), "")));
-
             A.CallTo(() => _engine1.GetSearchTotalCount(".net")).Returns(100);
             A.CallTo(() => _engine1.GetSearchTotalCount("java")).Returns(55);
             A.CallTo(() => _engine2.GetSearchTotalCount(".net")).Returns(150);
             A.CallTo(() => _engine2.GetSearchTotalCount("java")).Returns(23);
             A.CallTo(() => _engine3.GetSearchTotalCount(".net")).Returns(78);
             A.CallTo(() => _engine3.GetSearchTotalCount("java")).Returns(455);
-            _model = new SearchFightModel(new[] { _engine1, _engine2, _engine3 });
         }
 
         [Fact]
         public void GetTermSearchResults()
         {
             //  arrange
+            _model = new SearchFightModel(new[] { _engine1, _engine2, _engine3 });
             var terms = new[] { ".net", "java" };
 
             //  act

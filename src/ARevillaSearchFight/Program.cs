@@ -20,7 +20,8 @@ namespace ARevillaSearchFight
                 .AddSingleton<ISearchFightView, SearchFightConsoleView>()
                 .AddSingleton<ISearchFightModel, Models.Implementations.SearchFightModel>()
                 .AddSingleton<ISearchEngine, Engines.Google.GoogleCustomSearchEngine>()
-                .AddSingleton<ISearchEngine, Engines.Microsoft.BingSearchEngine>();
+                .AddSingleton<ISearchEngine, Engines.Microsoft.BingSearchEngine>()
+                .AddSingleton<SearchFightPresenter>();  
 
             var provider = services.BuildServiceProvider();
 

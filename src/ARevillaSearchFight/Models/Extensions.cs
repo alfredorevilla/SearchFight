@@ -13,7 +13,7 @@ namespace ARevillaSearchFight.Models
         public static ModelTermSearchResult[] GetWinnersTermsPerSearchEngine(this IEnumerable<ModelTermSearchResult> results)
         {
             return results.Select(result => result.SearchEngineName).Distinct()
-                .Select(engine => results.Where(result => result.SearchEngineName == engine).OrderByDescending(model => model.Count).Single()).ToArray();
+                .Select(engine => results.Where(result => result.SearchEngineName == engine).OrderByDescending(model => model.Count).First()).ToArray();
         }
     }
 }
