@@ -31,9 +31,9 @@ namespace ARevillaSearchFight.Presenters
             }
             this.View.RenderSearchAndFightData(data: new Views.Models.SearchAndFightData
             {
-                TotalResultsPerTermPerEngine = this.Model.GetResultsCountPerTermPerEngine(terms: e.Terms),
-                WinnerTermPerSearchEngine = this.Model.GetWinnersTermsPerSearchEngine(terms: e.Terms),
-                OverallWinnerTerm = this.Model.GetOverallWinnerTerm(terms: e.Terms),
+                TotalResultsPerTermPerEngine = this.Model.GetResultsCountPerTermPerEngine(terms: terms),
+                WinnerTermPerSearchEngine = this.Model.GetWinnersTermsPerSearchEngine(terms: terms),
+                OverallWinnerTerm = this.Model.GetOverallWinnerTerm(terms: terms),
             });
         }
 

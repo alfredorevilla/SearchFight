@@ -10,24 +10,58 @@ namespace ARevillaSearchFight.Views.Implementations
     {
         public event EventHandler<SearchAndFightArgs> SearchAndFight;
 
+        public ConsoleColor ForegroundColor
+        {
+            get { return Console.ForegroundColor; }
+            set { Console.ForegroundColor = value; }
+        }
+
+        public ConsoleColor BackgroundColor
+        {
+            get { return Console.BackgroundColor; }
+            set { Console.BackgroundColor = value; }
+        }
+
         public void RenderError(string message)
         {
-            throw new NotImplementedException();
+            Console.WriteLine();
+            var color = this.ForegroundColor;
+            this.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"[Error: {message}]");
+            this.ForegroundColor = color;
         }
 
         public void RenderMessage(string message)
         {
-            throw new NotImplementedException();
+            var color = this.ForegroundColor;
+            this.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine();
+            Console.WriteLine(message);
+            this.ForegroundColor = color;
         }
 
         public void RenderSearchAndFightData(SearchAndFightData data)
         {
-            throw new NotImplementedException();
+            Console.WriteLine();
+            Console.WriteLine("[Results:");
+            var engineNames = data.TotalResultsPerTermPerEngine.Select(o => o.EngineName);
+            foreach (var item in data.TotalResultsPerTermPerEngine)
+            {
+
+            }
         }
 
         public void RenderWarningList(string titleOrCategory, string[] items)
         {
-            throw new NotImplementedException();
+            Console.WriteLine();
+            if (!string.IsNullOrWhiteSpace(titleOrCategory))
+            {
+                Console.WriteLine(titleOrCategory);
+            }
+            foreach (var item in items)
+            {
+                Console.WriteLine($"• {item}");
+            }
         }
     }
 }
