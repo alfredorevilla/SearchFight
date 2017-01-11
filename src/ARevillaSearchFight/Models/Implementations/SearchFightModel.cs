@@ -14,17 +14,6 @@ namespace ARevillaSearchFight.Models.Implementations
 
         public ISearchEngine[] SearchEngines { get; }
 
-        /// <summary>
-        /// Todo: Move to extension method?
-        /// </summary>
-        /// <param name="terms"></param>
-        /// <returns></returns>
-        public string GetOverallWinnerTerm(string[] terms)
-        {
-            var results = this.GetTermSearchResults(terms);
-            return results.GroupBy(o => o.Term).Select(grouping => new { Term = grouping.Key, Total = grouping.Sum(o => o.Count) }).OrderByDescending(o => o.Total).First().Term;
-        }
-
         public ModelTermSearchResult[] GetTermSearchResults(string[] terms)
         {
             var array = new ModelTermSearchResult[terms.Length * this.SearchEngines.Length];
@@ -43,23 +32,7 @@ namespace ARevillaSearchFight.Models.Implementations
             return array;
         }
 
-        /// <summary>
-        /// Todo: Move to extension method?
-        /// </summary>
-        /// <param name="terms"></param>
-        /// <returns></returns>
-        public TermSearchResult[] GetWinnersTermsPerSearchEngine(string[] terms)
-        {
-            var results = this.GetTermSearchResults(terms);
-            return this.SearchEngines.Select(engine => results.Where(result => result.SearchEngineName == engine.GetName()).OrderByDescending(o => o.Count).Single()).Select(model => new TermSearchResult
-            {
-                Count = model.Count,
-                SearchEngineName = model.SearchEngineName,
-                Term = model.Term
-            }).ToArray();
-        }
-
-        public bool TryValidateTerms(string[] terms, out string[] validationErrors)
+            public bool TryValidateTerms(string[] terms, out string[] validationErrors)
         {
             List<string> errors = new List<string>();
             if (terms == null || (terms = terms.Select(o => StringHelper.RemoveExtraWhitespaces(o)).ToArray()).Count() < 2)

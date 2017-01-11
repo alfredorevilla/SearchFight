@@ -45,7 +45,7 @@ namespace ARevillaSearchFight.Views.Implementations
             this.ForegroundColor = color;
         }
 
-        public void RenderSearchAndFightData(SearchAndFightData data)
+        public void RenderSearchAndFightData(SearchAndFightModel data)
         {
             var color = this.ForegroundColor;
             this.ForegroundColor = ConsoleColor.Green;

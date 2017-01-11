@@ -10,20 +10,6 @@ namespace ARevillaSearchFight.Models
     {
         bool TryValidateTerms(string[] terms, out string[] validationErrors);
 
-        /// <summary>
-        /// Todo: Move to extension method?
-        /// </summary>
-        /// <param name="terms"></param>
-        /// <returns></returns>
-        string GetOverallWinnerTerm(string[] terms);
-
-        /// <summary>
-        /// Todo: Move to extension method?
-        /// </summary>
-        /// <param name="terms"></param>
-        /// <returns></returns>
-        TermSearchResult[] GetWinnersTermsPerSearchEngine(string[] terms);
-
         ModelTermSearchResult[] GetTermSearchResults(string[] terms);
     }
 }

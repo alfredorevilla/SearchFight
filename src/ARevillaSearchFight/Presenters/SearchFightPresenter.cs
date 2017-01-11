@@ -1,10 +1,7 @@
 ﻿using ARevillaSearchFight.Models;
 using ARevillaSearchFight.Views;
 using ARevillaSearchFight.Views.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace ARevillaSearchFight.Presenters
 {
@@ -16,10 +13,9 @@ namespace ARevillaSearchFight.Presenters
             this.Model = model;
         }
 
-        private void View_SearchAndFight(object sender, SearchAndFightArgs e)
-        {
-            this.SearchAndFight(e.Terms);
-        }
+        public ISearchFightModel Model { get; }
+
+        public ISearchFightView View { get; }
 
         public void SearchAndFight(string[] terms)
         {
@@ -29,18 +25,25 @@ namespace ARevillaSearchFight.Presenters
                 this.View.RenderWarningList(titleOrCategory: "Validation errors", items: validationErrors);
                 return;
             }
-            this.View.RenderSearchAndFightData(data: new Views.Models.SearchAndFightData
+            var modelResults = this.Model.GetTermSearchResults(terms);
+            var results = modelResults.Select(o => new TermSearchResult { Count = o.Count, SearchEngineName = o.SearchEngineName, Term = o.Term }).ToArray();
+            var winners = modelResults.GetWinnersTermsPerSearchEngine().Select(model => results.Single(result => result.Term == model.Term && result.SearchEngineName == model.SearchEngineName)).Select(model => new TermSearchResult
             {
-                SearchResults = this.Model.GetTermSearchResults(terms: terms),
-                WinnerTerms = this.Model.GetWinnersTermsPerSearchEngine(terms: terms),
-                OverallWinnerTerm = this.Model.GetOverallWinnerTerm(terms: terms),
+                Count = model.Count,
+                SearchEngineName = model.SearchEngineName,
+                Term = model.Term
+            }).ToArray();
+            this.View.RenderSearchAndFightData(data: new Views.Models.SearchAndFightModel
+            {
+                SearchResults = results,
+                WinnerTerms = winners,
+                OverallWinnerTerm = modelResults.GetOverallWinnerTerm()
             });
         }
 
-        public ISearchFightView View { get; }
-        public ISearchFightModel Model { get; }
+        private void View_SearchAndFight(object sender, SearchAndFightArgs e)
+        {
+            this.SearchAndFight(e.Terms);
+        }
     }
 }
-
-
-

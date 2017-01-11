@@ -3,7 +3,7 @@
     /// <summary>
     /// Extensive model
     /// </summary>
-    public class SearchAndFightData
+    public class SearchAndFightModel
     {
         public string OverallWinnerTerm { get; set; }
 

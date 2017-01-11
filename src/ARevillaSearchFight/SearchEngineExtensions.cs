@@ -10,7 +10,7 @@ namespace ARevillaSearchFight
 {
     public static class SearchEngineExtensions
     {
-
+        //  global cache
         static Dictionary<Type, string> _names = new Dictionary<Type, string>();
 
         /// <summary>
