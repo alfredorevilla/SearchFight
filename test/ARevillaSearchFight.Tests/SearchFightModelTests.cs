@@ -12,7 +12,6 @@ namespace ARevillaSearchFight.Tests
 {
     public class SearchFightModelTests
     {
-        //private IEnumerable<ISearchEngine> _engines;
         ISearchEngine _engine1;
         ISearchEngine _engine2;
         ISearchEngine _engine3;
@@ -20,22 +19,17 @@ namespace ARevillaSearchFight.Tests
         public SearchFightModelTests()
         {
             //  arrange
-            Expression<Func<Attribute>> att1 = () => new SearchEngineMetadataAttribute(nameof(_engine1), "");
-            _engine1 = A.Fake<ISearchEngine>(options => options.WithAttributes(att1));
-            Expression<Func<Attribute>> att2 = () => new SearchEngineMetadataAttribute(nameof(_engine2), "");
-            _engine2 = A.Fake<ISearchEngine>(options => options.WithAttributes(att2));
-            Expression<Func<Attribute>> att3 = () => new SearchEngineMetadataAttribute(nameof(_engine3), "");
-            _engine3 = A.Fake<ISearchEngine>(options => options.WithAttributes(att3));
+            _engine1 = A.Fake<ISearchEngine>(options => options.WithAttributes(() => new SearchEngineMetadataAttribute(nameof(_engine1), "")));
+            _engine2 = A.Fake<ISearchEngine>(options => options.WithAttributes(() => new SearchEngineMetadataAttribute(nameof(_engine2), "")));
+            _engine3 = A.Fake<ISearchEngine>(options => options.WithAttributes(() => new SearchEngineMetadataAttribute(nameof(_engine3), "")));
 
-            var _engines = new[] { _engine1, _engine2, _engine3 };
-
-            A.CallTo(() => _engines.ElementAt(0).GetSearchTotalCount(".net")).Returns(100);
-            A.CallTo(() => _engines.ElementAt(0).GetSearchTotalCount(".java")).Returns(55);
-            A.CallTo(() => _engines.ElementAt(1).GetSearchTotalCount(".net")).Returns(150);
-            A.CallTo(() => _engines.ElementAt(1).GetSearchTotalCount(".java")).Returns(23);
-            A.CallTo(() => _engines.ElementAt(2).GetSearchTotalCount(".net")).Returns(78);
-            A.CallTo(() => _engines.ElementAt(2).GetSearchTotalCount(".java")).Returns(455);
-            _model = new SearchFightModel(_engines);
+            A.CallTo(() => _engine1.GetSearchTotalCount(".net")).Returns(100);
+            A.CallTo(() => _engine1.GetSearchTotalCount("java")).Returns(55);
+            A.CallTo(() => _engine2.GetSearchTotalCount(".net")).Returns(150);
+            A.CallTo(() => _engine2.GetSearchTotalCount("java")).Returns(23);
+            A.CallTo(() => _engine3.GetSearchTotalCount(".net")).Returns(78);
+            A.CallTo(() => _engine3.GetSearchTotalCount("java")).Returns(455);
+            _model = new SearchFightModel(new[] { _engine1, _engine2, _engine3 });
         }
 
         [Fact]
