@@ -28,7 +28,6 @@ namespace ARevillaSearchFight.Search
                 {
                     if (!_names.ContainsKey(t))
                     {
-                        //  hackish fix for fakeiteasy
                         var name = t.GetTypeInfo().GetCustomAttribute<SearchEngineMetadataAttribute>(t.Name.Equals("ObjectProxy") ? true : false)?.Name;
                         _names.Add(t, name ?? t.Name);
                     }
