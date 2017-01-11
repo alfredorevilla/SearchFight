@@ -1,5 +1,6 @@
 ﻿using ARevillaSearchFight.Engines.Microsoft.Models;
 using ARevillaSearchFight.Models;
+using ARevillaSearchFight.Search;
 using Newtonsoft.Json;
 using System;
 using System.Net.Http;
@@ -47,10 +48,6 @@ namespace ARevillaSearchFight.Engines.Microsoft
             }
             throw new BingSearchEngineException(result.ReasonPhrase);
         }
-
-        public SearchResults Search(string term, int offset, int maxResults)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

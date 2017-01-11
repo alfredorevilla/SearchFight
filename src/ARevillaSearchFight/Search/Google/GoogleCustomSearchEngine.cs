@@ -1,5 +1,6 @@
 ﻿using ARevillaSearchFight.Engines.Google.Models;
 using ARevillaSearchFight.Models;
+using ARevillaSearchFight.Search;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -50,10 +51,6 @@ namespace ARevillaSearchFight.Engines.Google
                 throw new GoogleCustomSearchException(e.Message);
             }
         }
-
-        public SearchResults Search(string term, int offset, int maxResults)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

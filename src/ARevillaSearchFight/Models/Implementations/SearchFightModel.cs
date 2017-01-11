@@ -1,4 +1,5 @@
-﻿using ARevillaSearchFight.Views.Models;
+﻿using ARevillaSearchFight.Search;
+using ARevillaSearchFight.Views.Models;
 using System.Collections.Generic;
 using System.Linq;
 

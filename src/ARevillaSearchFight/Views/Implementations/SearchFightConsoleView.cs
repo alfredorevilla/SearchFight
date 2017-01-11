@@ -8,6 +8,11 @@ namespace ARevillaSearchFight.Views.Implementations
 {
     public class SearchFightConsoleView : ISearchFightView
     {
+        protected virtual void OnSearchAndFight(string[] terms)
+        {
+            this.SearchAndFight?.Invoke(this, new Models.SearchAndFightArgs(terms));
+        }
+
         public event EventHandler<SearchAndFightArgs> SearchAndFight;
 
         public ConsoleColor ForegroundColor

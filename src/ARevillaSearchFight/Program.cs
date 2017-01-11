@@ -7,6 +7,7 @@ using ARevillaSearchFight.Views;
 using ARevillaSearchFight.Models;
 using ARevillaSearchFight.Presenters;
 using ARevillaSearchFight.Views.Implementations;
+using ARevillaSearchFight.Search;
 
 namespace ARevillaSearchFight
 {
