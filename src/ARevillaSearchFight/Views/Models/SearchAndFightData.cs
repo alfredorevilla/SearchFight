@@ -7,9 +7,9 @@
     {
         public string OverallWinnerTerm { get; set; }
 
-        public ResultCountPerTermPerEngine[] TotalResultsPerTermPerEngine { get; set; }
+        public TermSearchResult[] SearchResults { get; set; }
 
-        public WinnerTermPerEngine[] WinnerTermPerSearchEngine { get; set; }
+        public TermSearchResult[] WinnerTerms { get; set; }
 
     }
 }

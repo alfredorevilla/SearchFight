@@ -24,15 +24,15 @@ namespace ARevillaSearchFight.Presenters
         public void SearchAndFight(string[] terms)
         {
             string[] validationErrors;
-            if (!this.Model.ValidateTerms(terms: terms, validationErrors: out validationErrors))
+            if (!this.Model.TryValidateTerms(terms: terms, validationErrors: out validationErrors))
             {
                 this.View.RenderWarningList(titleOrCategory: "Validation errors", items: validationErrors);
                 return;
             }
             this.View.RenderSearchAndFightData(data: new Views.Models.SearchAndFightData
             {
-                TotalResultsPerTermPerEngine = this.Model.GetResultsCountPerTermPerEngine(terms: terms),
-                WinnerTermPerSearchEngine = this.Model.GetWinnersTermsPerSearchEngine(terms: terms),
+                SearchResults = this.Model.GetTermSearchResults(terms: terms),
+                WinnerTerms = this.Model.GetWinnersTermsPerSearchEngine(terms: terms),
                 OverallWinnerTerm = this.Model.GetOverallWinnerTerm(terms: terms),
             });
         }

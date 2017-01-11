@@ -7,10 +7,10 @@ namespace ARevillaSearchFight.Views.Models
 {
     public class WinnerTermPerEngine
     {
-        public string Term { get; }
+        public string Term { get; set; }
 
-        public string Engine { get; }
+        public string Engine { get; set; }
 
-        public int TotalResults { get; }
+        public int TotalResults { get; set; }
     }
 }

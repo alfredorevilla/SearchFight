@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -8,6 +9,9 @@ namespace ARevillaSearchFight
 {
     public static class SearchEngineExtensions
     {
+
+        static Dictionary<Type, string> _names = new Dictionary<Type, string>();
+
         /// <summary>
         /// Get the name for the specified engine. 
         /// </summary>
@@ -16,9 +20,19 @@ namespace ARevillaSearchFight
         /// <returns></returns>
         public static string GetName<T>(this T engine) where T : ISearchEngine
         {
-            var name = typeof(T).GetTypeInfo().CustomAttributes.OfType<SearchEngineMetadataAttribute>().SingleOrDefault()?.Name;
-            return name ?? typeof(T).Name;
-
+            var t = typeof(T);
+            if (!_names.ContainsKey(t))
+            {
+                lock (((ICollection)_names).SyncRoot)
+                {
+                    if (!_names.ContainsKey(t))
+                    {
+                        var name = typeof(T).GetTypeInfo().CustomAttributes.OfType<SearchEngineMetadataAttribute>().SingleOrDefault()?.Name;
+                        _names.Add(t, name ?? typeof(T).Name);
+                    }
+                }
+            }
+            return _names[t];
         }
     }
 }

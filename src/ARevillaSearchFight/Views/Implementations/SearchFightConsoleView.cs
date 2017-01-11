@@ -44,8 +44,8 @@ namespace ARevillaSearchFight.Views.Implementations
         {
             Console.WriteLine();
             Console.WriteLine("[Results:");
-            var engineNames = data.TotalResultsPerTermPerEngine.Select(o => o.EngineName);
-            foreach (var item in data.TotalResultsPerTermPerEngine)
+            var engineNames = data.SearchResults.Select(o => o.SearchEngineName);
+            foreach (var item in data.SearchResults)
             {
 
             }

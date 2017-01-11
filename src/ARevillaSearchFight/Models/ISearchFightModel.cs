@@ -8,9 +8,22 @@ namespace ARevillaSearchFight.Models
 {
     public interface ISearchFightModel
     {
-        bool ValidateTerms(string[] terms, out string[] validationErrors);
+        bool TryValidateTerms(string[] terms, out string[] validationErrors);
+
+        /// <summary>
+        /// Todo: Move to extension method?
+        /// </summary>
+        /// <param name="terms"></param>
+        /// <returns></returns>
         string GetOverallWinnerTerm(string[] terms);
-        WinnerTermPerEngine[] GetWinnersTermsPerSearchEngine(string[] terms);
-        ResultCountPerTermPerEngine[] GetResultsCountPerTermPerEngine(string[] terms);
+
+        /// <summary>
+        /// Todo: Move to extension method?
+        /// </summary>
+        /// <param name="terms"></param>
+        /// <returns></returns>
+        TermSearchResult[] GetWinnersTermsPerSearchEngine(string[] terms);
+
+        TermSearchResult[] GetTermSearchResults(string[] terms);
     }
 }
