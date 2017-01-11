@@ -16,14 +16,13 @@ namespace ARevillaSearchFight.Engines.Microsoft
 
         private HttpClient _httpClient;
 
-        public BingSearchEngine() : this(new HttpClient())
+        public BingSearchEngine() : this(new HttpClient() { BaseAddress = new Uri(api_base_address) })
         {
         }
 
         public BingSearchEngine(HttpClient httpClient)
         {
             this._httpClient = httpClient;
-            this._httpClient.BaseAddress = new Uri(api_base_address);
             this._httpClient.DefaultRequestHeaders.Add(api_key_header, api_key);
         }
 
@@ -48,6 +47,6 @@ namespace ARevillaSearchFight.Engines.Microsoft
             }
             throw new BingSearchEngineException(result.ReasonPhrase);
         }
-        
+
     }
 }

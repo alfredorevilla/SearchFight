@@ -25,14 +25,14 @@ namespace ARevillaSearchFight.Models.Implementations
             return results.GroupBy(o => o.Term).Select(grouping => new { Term = grouping.Key, Total = grouping.Sum(o => o.Count) }).OrderByDescending(o => o.Total).First().Term;
         }
 
-        public TermSearchResult[] GetTermSearchResults(string[] terms)
+        public ModelTermSearchResult[] GetTermSearchResults(string[] terms)
         {
-            var array = new TermSearchResult[terms.Length * this.SearchEngines.Length];
+            var array = new ModelTermSearchResult[terms.Length * this.SearchEngines.Length];
             for (var i = 0; i < terms.Length;)
             {
                 foreach (var engine in this.SearchEngines)
                 {
-                    array[i] = new TermSearchResult
+                    array[i] = new ModelTermSearchResult
                     {
                         Count = engine.GetSearchTotalCount(terms[i]),
                         SearchEngineName = engine.GetName(),
@@ -51,7 +51,12 @@ namespace ARevillaSearchFight.Models.Implementations
         public TermSearchResult[] GetWinnersTermsPerSearchEngine(string[] terms)
         {
             var results = this.GetTermSearchResults(terms);
-            return this.SearchEngines.Select(engine => results.Where(result => result.SearchEngineName == engine.GetName()).OrderByDescending(o => o.Count).Single()).Select(o => o).ToArray();
+            return this.SearchEngines.Select(engine => results.Where(result => result.SearchEngineName == engine.GetName()).OrderByDescending(o => o.Count).Single()).Select(model => new TermSearchResult
+            {
+                Count = model.Count,
+                SearchEngineName = model.SearchEngineName,
+                Term = model.Term
+            }).ToArray();
         }
 
         public bool TryValidateTerms(string[] terms, out string[] validationErrors)

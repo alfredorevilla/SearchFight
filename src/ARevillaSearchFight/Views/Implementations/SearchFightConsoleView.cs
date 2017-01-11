@@ -47,13 +47,17 @@ namespace ARevillaSearchFight.Views.Implementations
 
         public void RenderSearchAndFightData(SearchAndFightData data)
         {
+            var color = this.ForegroundColor;
+            this.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine();
-            Console.WriteLine("[Results:");
+            Console.WriteLine("[Results:]");
             var engineNames = data.SearchResults.Select(o => o.SearchEngineName);
-            foreach (var item in data.SearchResults)
+            var group = data.SearchResults.GroupBy(o => o.Term);
+            foreach (var item in group)
             {
-
+                Console.WriteLine($"{item.Key}: {string.Join(" ", item.Select(o => $"{o.SearchEngineName}: {o.Count}"))}");
             }
+            this.ForegroundColor = color;
         }
 
         public void RenderWarningList(string titleOrCategory, string[] items)

@@ -24,6 +24,6 @@ namespace ARevillaSearchFight.Models
         /// <returns></returns>
         TermSearchResult[] GetWinnersTermsPerSearchEngine(string[] terms);
 
-        TermSearchResult[] GetTermSearchResults(string[] terms);
+        ModelTermSearchResult[] GetTermSearchResults(string[] terms);
     }
 }
