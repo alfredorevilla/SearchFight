@@ -45,23 +45,34 @@ namespace ARevillaSearchFight.Views.Implementations
             this.ForegroundColor = color;
         }
 
-        public void RenderSearchAndFightData(SearchAndFightModel data)
+
+        public void RenderSearchAndFightData(SearchAndFightModel model)
         {
             var color = this.ForegroundColor;
             this.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine();
             Console.WriteLine("[Results:]");
-            var engineNames = data.SearchResults.Select(o => o.SearchEngineName);
-            var group = data.SearchResults.GroupBy(o => o.Term);
+            Console.WriteLine();
+            var engineNames = model.SearchResults.Select(o => o.SearchEngineName);
+            var group = model.SearchResults.GroupBy(o => o.Term);
             foreach (var item in group)
             {
                 Console.WriteLine($"{item.Key}: {string.Join(" ", item.Select(o => $"{o.SearchEngineName}: {o.Count}"))}");
             }
+            Console.WriteLine();
+            foreach (var item in model.WinnerTerms)
+            {
+                Console.WriteLine($"{item.SearchEngineName} winner: {item.Term}");
+            }
+            Console.WriteLine();
+            Console.WriteLine($"Total winner: {model.OverallWinnerTerm}");
             this.ForegroundColor = color;
         }
 
         public void RenderWarningList(string titleOrCategory, string[] items)
         {
+            var color = this.ForegroundColor;
+            this.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine();
             if (!string.IsNullOrWhiteSpace(titleOrCategory))
             {
@@ -69,8 +80,9 @@ namespace ARevillaSearchFight.Views.Implementations
             }
             foreach (var item in items)
             {
-                Console.WriteLine($"• {item}");
+                Console.WriteLine($"* {item}");
             }
+            this.ForegroundColor = color;
         }
     }
 }

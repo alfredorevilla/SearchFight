@@ -22,23 +22,30 @@ namespace ARevillaSearchFight.Presenters
             string[] validationErrors;
             if (!this.Model.TryValidateTerms(terms: terms, validationErrors: out validationErrors))
             {
-                this.View.RenderWarningList(titleOrCategory: "Validation errors", items: validationErrors);
+                this.View.RenderWarningList(titleOrCategory: "Validation errors: ", items: validationErrors);
                 return;
             }
-            var modelResults = this.Model.GetTermSearchResults(terms);
-            var results = modelResults.Select(o => new TermSearchResult { Count = o.Count, SearchEngineName = o.SearchEngineName, Term = o.Term }).ToArray();
-            var winners = modelResults.GetWinnersTermsPerSearchEngine().Select(model => results.Single(result => result.Term == model.Term && result.SearchEngineName == model.SearchEngineName)).Select(model => new TermSearchResult
+            try
             {
-                Count = model.Count,
-                SearchEngineName = model.SearchEngineName,
-                Term = model.Term
-            }).ToArray();
-            this.View.RenderSearchAndFightData(new Views.Models.SearchAndFightModel
+                var modelResults = this.Model.GetTermSearchResults(terms);
+                var results = modelResults.Select(o => new TermSearchResult { Count = o.Count, SearchEngineName = o.SearchEngineName, Term = o.Term }).ToArray();
+                var winners = modelResults.GetWinnersTermsPerSearchEngine().Select(model => results.Single(result => result.Term == model.Term && result.SearchEngineName == model.SearchEngineName)).Select(model => new TermSearchResult
+                {
+                    Count = model.Count,
+                    SearchEngineName = model.SearchEngineName,
+                    Term = model.Term
+                }).ToArray();
+                this.View.RenderSearchAndFightData(new Views.Models.SearchAndFightModel
+                {
+                    SearchResults = results,
+                    WinnerTerms = winners,
+                    OverallWinnerTerm = modelResults.GetOverallWinnerTerm()
+                });
+            }
+            catch (System.Exception e)
             {
-                SearchResults = results,
-                WinnerTerms = winners,
-                OverallWinnerTerm = modelResults.GetOverallWinnerTerm()
-            });
+                this.View.RenderError(e.Message);
+            }
         }
 
         private void View_SearchAndFight(object sender, SearchAndFightArgs e)
