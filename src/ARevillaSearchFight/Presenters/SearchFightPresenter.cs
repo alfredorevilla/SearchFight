@@ -22,7 +22,7 @@ namespace ARevillaSearchFight.Presenters
             string[] validationErrors;
             if (!this.Model.TryValidateTerms(terms: terms, validationErrors: out validationErrors))
             {
-                this.View.RenderWarningList(titleOrCategory: "Validation errors: ", items: validationErrors);
+                this.View.RenderWarningList(titleOrCategory: "Validation errors", items: validationErrors);
                 return;
             }
             try
