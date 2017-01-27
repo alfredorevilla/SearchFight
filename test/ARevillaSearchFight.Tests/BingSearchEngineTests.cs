@@ -1,20 +1,17 @@
-﻿using FluentAssertions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using ARevillaSearchFight.Engines.Microsoft;
+using ARevillaSearchFight.Search;
+using FluentAssertions;
 using Xunit;
-using ARevillaSearchFight.Engines.Microsoft;
 
 namespace ARevillaSearchFight.Tests
 {
     public class BingSearchEngineTests
     {
-        BingSearchEngine _engine;
+        private BingSearchEngine _engine;
+
         public BingSearchEngineTests()
         {
             _engine = new BingSearchEngine();
-            
         }
 
         [Fact]

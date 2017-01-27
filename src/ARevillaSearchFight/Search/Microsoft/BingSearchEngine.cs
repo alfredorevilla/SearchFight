@@ -1,9 +1,9 @@
 ﻿using ARevillaSearchFight.Engines.Microsoft.Models;
-using ARevillaSearchFight.Models;
 using ARevillaSearchFight.Search;
 using Newtonsoft.Json;
 using System;
 using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace ARevillaSearchFight.Engines.Microsoft
 {
@@ -26,12 +26,7 @@ namespace ARevillaSearchFight.Engines.Microsoft
             this._httpClient.DefaultRequestHeaders.Add(api_key_header, api_key);
         }
 
-        public BingSearchEngine(HttpMessageHandler handler) : this(new HttpClient(handler))
-        {
-        }
-
-        //  todo: async support
-        public int GetSearchTotalCount(string term)
+        public async Task<long> GetSearchTotalCountAsync(string term)
         {
             var parameters = new BingWebSearchParameters
             {
@@ -39,14 +34,13 @@ namespace ARevillaSearchFight.Engines.Microsoft
                 Count = 0,
             };
             var uri = new Uri(this._httpClient.BaseAddress, parameters.ToUri());
-            var result = this._httpClient.GetAsync(uri).Result;
+            var result = await this._httpClient.GetAsync(uri);
             if (result.IsSuccessStatusCode)
             {
-                var response = JsonConvert.DeserializeObject<BingSearchResponseModel>(result.Content.ReadAsStringAsync().Result);
+                var response = JsonConvert.DeserializeObject<BingSearchResponseModel>(await result.Content.ReadAsStringAsync());
                 return response.WebPages.TotalEstimatedMatches;
             }
             throw new BingSearchEngineException(result.ReasonPhrase);
         }
-
     }
 }

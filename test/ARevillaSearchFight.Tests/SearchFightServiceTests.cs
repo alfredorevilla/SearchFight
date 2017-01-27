@@ -10,13 +10,13 @@ using ARevillaSearchFight.Services.Implementations;
 
 namespace ARevillaSearchFight.Tests
 {
-    public class SearchFightModelExtensionsTests
+    public class SearchFightServiceTests
     {
         private IEnumerable<ModelTermSearchResult> _results;
 
         private SearchFightService _service;
 
-        public SearchFightModelExtensionsTests()
+        public SearchFightServiceTests()
         {
             _service = new SearchFightService();
         }

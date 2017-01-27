@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 namespace ARevillaSearchFight.Search
 {
     /// <summary>
-    /// Represents a search engine. 
+    /// Represents a search engine.
     /// </summary>
     public interface ISearchEngine
     {
         /// <summary>
-        /// Returns total number of search results found by the engine or service
+        /// Returns total number of search results found by the engine or service in a async manner
         /// </summary>
         /// <param name="term"></param>
         /// <returns></returns>
-        int GetSearchTotalCount(string term);
+        Task<long> GetSearchTotalCountAsync(string term);
     }
 }

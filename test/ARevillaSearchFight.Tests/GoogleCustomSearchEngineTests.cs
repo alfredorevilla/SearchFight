@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using ARevillaSearchFight.Search;
 using ARevillaSearchFight.Engines.Google;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,7 @@ namespace ARevillaSearchFight.Tests
 {
     public class GoogleCustomSearchEngineTests
     {
-
-        GoogleCustomSearchEngine _engine;
+        private GoogleCustomSearchEngine _engine;
 
         public GoogleCustomSearchEngineTests()
         {

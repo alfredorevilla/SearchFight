@@ -7,6 +7,6 @@ namespace ARevillaSearchFight.Engines.Microsoft.Models
 {
     public class WebPagesCollection
     {
-        public int TotalEstimatedMatches { get; set; }
+        public long TotalEstimatedMatches { get; set; }
     }
 }

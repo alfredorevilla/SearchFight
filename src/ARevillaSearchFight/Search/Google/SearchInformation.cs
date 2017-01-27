@@ -7,6 +7,6 @@ namespace ARevillaSearchFight.Engines.Google
 {
     public class SearchInformation
     {
-        public int TotalResults { get; set; }
+        public long TotalResults { get; set; }
     }
 }

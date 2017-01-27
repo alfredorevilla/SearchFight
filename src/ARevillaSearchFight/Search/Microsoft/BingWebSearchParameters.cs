@@ -15,19 +15,14 @@ namespace ARevillaSearchFight.Engines.Microsoft
 
         public string Query { get; set; }
 
-        public string ToString(bool prefixQuestionChar)
-        {
-            return (prefixQuestionChar ? "?" : "") + $"q={Query}&count={Count}&offset={Offset}&mkt={Market}";
-        }
-
         public override string ToString()
         {
-            return this.ToString(true);
+            return $"/bing/v5.0/search?q={Query}&count={Count}&offset={Offset}&mkt={Market}";
         }
 
-        public Uri ToUri(bool prefixQuestionChar = true)
+        public Uri ToUri()
         {
-            return new Uri("/bing/v5.0/search" + this.ToString(), UriKind.Relative);
+            return new Uri(this.ToString(), UriKind.Relative);
         }
     }
 }

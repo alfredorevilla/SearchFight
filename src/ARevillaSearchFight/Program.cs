@@ -10,6 +10,7 @@ using ARevillaSearchFight.Views.Implementations;
 using ARevillaSearchFight.Search;
 using ARevillaSearchFight.Services;
 using ARevillaSearchFight.Services.Implementations;
+using ARevillaSearchFight.Models.Implementations;
 
 namespace ARevillaSearchFight
 {
@@ -20,7 +21,7 @@ namespace ARevillaSearchFight
             var services = new ServiceCollection();
             services
                 .AddSingleton<ISearchFightView, SearchFightConsoleView>()
-                .AddSingleton<ISearchFightModel, Models.Implementations.SearchFightModel>()
+                .AddSingleton<ISearchFightModel, SearchFightModel>()
                 .AddSingleton<ISearchEngine, Engines.Google.GoogleCustomSearchEngine>()
                 .AddSingleton<ISearchEngine, Engines.Microsoft.BingSearchEngine>()
                 .AddSingleton<SearchFightPresenterCtorArgs>()

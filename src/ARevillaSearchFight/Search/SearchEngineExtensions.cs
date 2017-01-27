@@ -1,6 +1,7 @@
 ﻿using ARevillaSearchFight.Search;
 using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -10,11 +11,23 @@ namespace ARevillaSearchFight.Search
 {
     public static class SearchEngineExtensions
     {
+        /// <summary>
+        /// Returns total number of search results found by the engine or service in a synchronius manner
+        /// </summary>
+        /// <param name="term"></param>
+        /// <returns></returns>
+        public static long GetSearchTotalCount(this ISearchEngine engine, string term)
+        {
+            return engine.GetSearchTotalCountAsync(term).Result;
+        }
+
         //  global cache
-        static Dictionary<Type, string> _names = new Dictionary<Type, string>();
+        private static Dictionary<Type, string> _names = new Dictionary<Type, string>();
+
+        //static ConcurrentDictionary<Type,string>
 
         /// <summary>
-        /// Get the name for the specified engine. 
+        /// Get the name for the specified engine.
         /// </summary>
         /// <typeparam name="T">Type of<seealso cref="ISearchEngine"/></typeparam>
         /// <param name="engine">The engine from where to get its name</param>
