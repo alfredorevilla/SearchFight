@@ -2,19 +2,33 @@
 using ARevillaSearchFight.Views;
 using ARevillaSearchFight.Views.Models;
 using System.Linq;
+using Microsoft.Extensions.Logging;
+using System.ComponentModel.DataAnnotations;
+using System;
+using Newtonsoft.Json;
+using System.Collections.Generic;
+using ARevillaSearchFight.Services;
 
 namespace ARevillaSearchFight.Presenters
 {
     public class SearchFightPresenter
     {
-        public SearchFightPresenter(ISearchFightView view, ISearchFightModel model)
+        private ILogger<SearchFightPresenter> _logger;
+
+        public SearchFightPresenter(SearchFightPresenterCtorArgs args)
         {
-            this.View = view;
-            this.Model = model;
+            Validator.ValidateObject(args, new ValidationContext(args), true);
+
+            this.View = args.View;
+            this.Model = args.Model;
+            this.Service = args.Service;
+            this.Mapper = args.Mapper;
+            _logger = args.LoggerFactory?.CreateLogger<SearchFightPresenter>();
         }
 
+        public ISearchResultModelMapper Mapper { get; set; }
         public ISearchFightModel Model { get; }
-
+        public ISearchFightService Service { get; set; }
         public ISearchFightView View { get; }
 
         public void SearchAndFight(string[] terms)
@@ -28,18 +42,12 @@ namespace ARevillaSearchFight.Presenters
             try
             {
                 var modelResults = this.Model.GetTermSearchResults(terms);
-                var results = modelResults.Select(o => new TermSearchResult { Count = o.Count, SearchEngineName = o.SearchEngineName, Term = o.Term }).ToArray();
-                var winners = modelResults.GetWinnersTermsPerSearchEngine().Select(model => results.Single(result => result.Term == model.Term && result.SearchEngineName == model.SearchEngineName)).Select(model => new TermSearchResult
-                {
-                    Count = model.Count,
-                    SearchEngineName = model.SearchEngineName,
-                    Term = model.Term
-                }).ToArray();
+
                 this.View.RenderSearchAndFightData(new Views.Models.SearchAndFightModel
                 {
-                    SearchResults = results,
-                    WinnerTerms = winners,
-                    OverallWinnerTerm = modelResults.GetOverallWinnerTerm()
+                    SearchResults = this.Mapper.ToViewDataModel(modelResults).ToArray(),
+                    WinnerTerms = this.Mapper.ToViewDataModel(this.Service.GetWinnersTermsPerSearchEngine(modelResults)).ToArray(),
+                    OverallWinnerTerm = this.Service.GetOverallWinnerTerm(modelResults),
                 });
             }
             catch (System.Exception e)

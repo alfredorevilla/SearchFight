@@ -5,12 +5,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
+using ARevillaSearchFight.Services;
+using ARevillaSearchFight.Services.Implementations;
 
 namespace ARevillaSearchFight.Tests
 {
     public class SearchFightModelExtensionsTests
     {
-        IEnumerable<ModelTermSearchResult> _results;
+        private IEnumerable<ModelTermSearchResult> _results;
+
+        private SearchFightService _service;
+
+        public SearchFightModelExtensionsTests()
+        {
+            _service = new SearchFightService();
+        }
 
         [Fact]
         public void GetOverallWinnerTerm()
@@ -44,7 +53,7 @@ namespace ARevillaSearchFight.Tests
                 },
             };
 
-            _results.GetOverallWinnerTerm().Should().Be("java");
+            _service.GetOverallWinnerTerm(_results).Should().Be("java");
         }
 
         [Fact]
@@ -79,13 +88,11 @@ namespace ARevillaSearchFight.Tests
                 },
             };
 
-            var result = _results.GetWinnersTermsPerSearchEngine();
+            var result = _service.GetWinnersTermsPerSearchEngine(_results);
             result.Count().Should().Be(2);
             result.Select(o => o.Term).Distinct().Count().Should().Be(1);
             result.Select(o => o.Term).Distinct().Single().Should().Be("java");
             result.Select(o => o.SearchEngineName).Distinct().Count().Should().Be(2);
-
         }
-
     }
 }

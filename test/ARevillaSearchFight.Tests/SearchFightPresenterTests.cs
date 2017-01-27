@@ -9,20 +9,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
+using Microsoft.Extensions.Logging;
 
 namespace ARevillaSearchFight.Tests
 {
     public class SearchFightPresenterTests
     {
-        SearchFightPresenter _presenter;
-        ISearchFightView _view;
-        ISearchFightModel _model;
+        private SearchFightPresenter _presenter;
+        private ISearchFightView _view;
+        private ISearchFightModel _model;
+        private ILoggerFactory _logger;
 
         public SearchFightPresenterTests()
         {
             _view = A.Fake<ISearchFightView>();
             _model = A.Fake<ISearchFightModel>();
-            _presenter = new SearchFightPresenter(_view, _model);
+            _logger = A.Fake<ILoggerFactory>();
+            _presenter = new SearchFightPresenter(new SearchFightPresenterCtorArgs
+            {
+                LoggerFactory = _logger,
+                View = _view,
+                Model = _model,
+            });
         }
 
         [Fact]
