@@ -1,13 +1,9 @@
-﻿using ORevillaSearchFight.Models;
-using ORevillaSearchFight.Views;
-using ORevillaSearchFight.Views.Models;
-using System.Linq;
-using Microsoft.Extensions.Logging;
-using System.ComponentModel.DataAnnotations;
-using System;
-using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using Microsoft.Extensions.Logging;
+using ORevillaSearchFight.Models;
 using ORevillaSearchFight.Services;
+using ORevillaSearchFight.Views;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace ORevillaSearchFight.Presenters
 {
@@ -54,11 +50,6 @@ namespace ORevillaSearchFight.Presenters
             {
                 this.View.RenderError(e.Message);
             }
-        }
-
-        private void View_SearchAndFight(object sender, SearchAndFightArgs e)
-        {
-            this.SearchAndFight(e.Terms);
         }
     }
 }

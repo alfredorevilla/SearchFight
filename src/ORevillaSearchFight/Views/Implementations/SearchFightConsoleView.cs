@@ -1,30 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ORevillaSearchFight.Views.Models;
+using System;
 using System.Linq;
-using System.Threading.Tasks;
-using ORevillaSearchFight.Views.Models;
 
 namespace ORevillaSearchFight.Views.Implementations
 {
     public class SearchFightConsoleView : ISearchFightView
     {
-        protected virtual void OnSearchAndFight(string[] terms)
-        {
-            this.SearchAndFight?.Invoke(this, new Models.SearchAndFightArgs(terms));
-        }
-
         public event EventHandler<SearchAndFightArgs> SearchAndFight;
-
-        public ConsoleColor ForegroundColor
-        {
-            get { return Console.ForegroundColor; }
-            set { Console.ForegroundColor = value; }
-        }
 
         public ConsoleColor BackgroundColor
         {
             get { return Console.BackgroundColor; }
             set { Console.BackgroundColor = value; }
+        }
+
+        public ConsoleColor ForegroundColor
+        {
+            get { return Console.ForegroundColor; }
+            set { Console.ForegroundColor = value; }
         }
 
         public void RenderError(string message)
@@ -50,7 +43,7 @@ namespace ORevillaSearchFight.Views.Implementations
             var color = this.ForegroundColor;
             this.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine();
-            Console.WriteLine("[Results:]");
+            Console.WriteLine("=== Results: ===");
             Console.WriteLine();
             var engineNames = model.SearchResults.Select(o => o.SearchEngineName);
             var group = model.SearchResults.GroupBy(o => o.Term);
@@ -64,7 +57,7 @@ namespace ORevillaSearchFight.Views.Implementations
                 Console.WriteLine($"{item.SearchEngineName} winner: {item.Term}");
             }
             Console.WriteLine();
-            Console.WriteLine($"Total winner: {model.OverallWinnerTerm}");
+            Console.WriteLine($"Overall winner: {model.OverallWinnerTerm}");
             this.ForegroundColor = color;
         }
 

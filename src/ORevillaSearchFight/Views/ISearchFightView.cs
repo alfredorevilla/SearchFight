@@ -1,18 +1,15 @@
 ﻿using ORevillaSearchFight.Views.Models;
-using System;
 
 namespace ORevillaSearchFight.Views
 {
     public interface ISearchFightView
     {
-        event EventHandler<SearchAndFightArgs> SearchAndFight;
+        void RenderError(string message);
 
         void RenderMessage(string message);
 
-        void RenderError(string message);
+        void RenderSearchAndFightData(SearchAndFightModel model);
 
         void RenderWarningList(string titleOrCategory, string[] items);
-
-        void RenderSearchAndFightData(SearchAndFightModel model);
     }
 }
