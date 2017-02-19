@@ -1,15 +1,13 @@
-﻿using ORevillaSearchFight.Models;
+﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.Extensions.Logging;
+using ORevillaSearchFight.Models;
 using ORevillaSearchFight.Services;
 using ORevillaSearchFight.Views;
-using Microsoft.Extensions.Logging;
-using System.ComponentModel.DataAnnotations;
 
-namespace ORevillaSearchFight.Presenters
-{
-    public class SearchFightPresenterCtorArgs
-    {
-        public SearchFightPresenterCtorArgs(ISearchFightView view, ISearchFightModel model, ISearchFightService service, ISearchResultModelMapper mapper, ILoggerFactory loggerFactory)
-        {
+namespace ORevillaSearchFight.Presenters {
+    public class SearchFightPresenterCtorArgs {
+
+        public SearchFightPresenterCtorArgs(ISearchFightView view, ISearchFightModel model, ISearchFightService service, ISearchResultModelMapper mapper, ILoggerFactory loggerFactory) {
             this.View = view;
             this.Model = model;
             this.Service = service;
@@ -17,8 +15,7 @@ namespace ORevillaSearchFight.Presenters
             this.LoggerFactory = loggerFactory;
         }
 
-        public SearchFightPresenterCtorArgs()
-        {
+        public SearchFightPresenterCtorArgs() {
         }
 
         public ILoggerFactory LoggerFactory { get; set; }

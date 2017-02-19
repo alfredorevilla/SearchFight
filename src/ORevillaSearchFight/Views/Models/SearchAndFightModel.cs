@@ -1,10 +1,8 @@
-﻿namespace ORevillaSearchFight.Views.Models
-{
+﻿namespace ORevillaSearchFight.Views.Models {
     /// <summary>
     /// Extensive model
     /// </summary>
-    public class SearchAndFightModel
-    {
+    public class SearchAndFightModel {
         public string OverallWinnerTerm { get; set; }
 
         public TermSearchResult[] SearchResults { get; set; }
