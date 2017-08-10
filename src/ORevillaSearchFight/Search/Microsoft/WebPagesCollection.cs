@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ORevillaSearchFight.Engines.Microsoft.Models
+namespace SearchFight.Engines.Microsoft.Models
 {
     public class WebPagesCollection
     {

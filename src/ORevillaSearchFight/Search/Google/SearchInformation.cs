@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ORevillaSearchFight.Engines.Google
+namespace SearchFight.Engines.Google
 {
     public class SearchInformation
     {

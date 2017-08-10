@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ORevillaSearchFight.Models
+namespace SearchFight.Models
 {
     public class ModelTermSearchResult
     {
-        public string SearchEngineName { get; set; }
-
         public long Count { get; set; }
-
+        public string SearchEngineName { get; set; }
         public string Term { get; set; }
     }
 }

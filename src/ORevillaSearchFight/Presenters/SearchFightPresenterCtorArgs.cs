@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.Extensions.Logging;
-using ORevillaSearchFight.Models;
-using ORevillaSearchFight.Services;
-using ORevillaSearchFight.Views;
+using SearchFight.Models;
+using SearchFight.Services;
+using SearchFight.Views;
 
-namespace ORevillaSearchFight.Presenters {
+namespace SearchFight.Presenters {
+
     public class SearchFightPresenterCtorArgs {
 
         public SearchFightPresenterCtorArgs(ISearchFightView view, ISearchFightModel model, ISearchFightService service, ISearchResultModelMapper mapper, ILoggerFactory loggerFactory) {

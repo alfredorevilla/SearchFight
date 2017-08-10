@@ -1,15 +1,19 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Microsoft.Extensions.Logging;
-using ORevillaSearchFight.Models;
-using ORevillaSearchFight.Services;
-using ORevillaSearchFight.Views;
+using SearchFight.Models;
+using SearchFight.Services;
+using SearchFight.Views;
 
-namespace ORevillaSearchFight.Presenters {
-    public class SearchFightPresenter {
+namespace SearchFight.Presenters
+{
+
+    public class SearchFightPresenter
+    {
         private ILogger<SearchFightPresenter> _logger;
 
-        public SearchFightPresenter(SearchFightPresenterCtorArgs args) {
+        public SearchFightPresenter(SearchFightPresenterCtorArgs args)
+        {
             Validator.ValidateObject(args, new ValidationContext(args), true);
 
             this.View = args.View;
@@ -24,22 +28,27 @@ namespace ORevillaSearchFight.Presenters {
         public ISearchFightService Service { get; set; }
         public ISearchFightView View { get; }
 
-        public void SearchAndFight(string[] terms) {
+        public void SearchAndFight(string[] terms)
+        {
             string[] validationErrors;
-            if (!this.Model.TryValidateTerms(terms: terms, validationErrors: out validationErrors)) {
+            if (!this.Model.TryValidateTerms(terms: terms, validationErrors: out validationErrors))
+            {
                 this.View.RenderWarningList(titleOrCategory: "Validation errors", items: validationErrors);
                 return;
             }
-            try {
+            try
+            {
                 var modelResults = this.Model.GetTermSearchResults(terms);
 
-                this.View.RenderSearchAndFightData(new Views.Models.SearchAndFightModel {
+                this.View.RenderSearchAndFightData(new Views.Models.SearchAndFightModel
+                {
                     SearchResults = this.Mapper.ToViewDataModel(modelResults).ToArray(),
                     WinnerTerms = this.Mapper.ToViewDataModel(this.Service.GetWinnersTermsPerSearchEngine(modelResults)).ToArray(),
                     OverallWinnerTerm = this.Service.GetOverallWinnerTerm(modelResults),
                 });
             }
-            catch (System.Exception e) {
+            catch (System.Exception e)
+            {
                 this.View.RenderError(e.Message);
             }
         }

@@ -1,8 +1,8 @@
 ﻿using FluentAssertions;
-using ORevillaSearchFight.Models;
-using ORevillaSearchFight.Presenters;
-using ORevillaSearchFight.Views;
-using ORevillaSearchFight.Views.Models;
+using SearchFight.Models;
+using SearchFight.Presenters;
+using SearchFight.Views;
+using SearchFight.Views.Models;
 using FakeItEasy;
 using System;
 using System.Collections.Generic;
@@ -11,14 +11,14 @@ using System.Threading.Tasks;
 using Xunit;
 using Microsoft.Extensions.Logging;
 
-namespace ORevillaSearchFight.Tests
+namespace SearchFight.Tests
 {
     public class SearchFightPresenterTests
     {
+        private ILoggerFactory _logger;
+        private ISearchFightModel _model;
         private SearchFightPresenter _presenter;
         private ISearchFightView _view;
-        private ISearchFightModel _model;
-        private ILoggerFactory _logger;
 
         public SearchFightPresenterTests()
         {

@@ -1,10 +1,10 @@
-﻿using ORevillaSearchFight.Models;
+﻿using SearchFight.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ORevillaSearchFight.Search
+namespace SearchFight.Search
 {
     /// <summary>
     /// Represents a search engine.

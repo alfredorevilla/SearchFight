@@ -1,6 +1,7 @@
 ﻿using System;
 
-namespace ORevillaSearchFight.Views.Models {
+namespace SearchFight.Views.Models {
+
     public class SearchAndFightArgs : EventArgs {
 
         public SearchAndFightArgs(string[] terms) {

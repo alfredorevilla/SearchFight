@@ -1,11 +1,11 @@
-﻿using ORevillaSearchFight.Engines.Google.Models;
-using ORevillaSearchFight.Search;
+﻿using SearchFight.Engines.Google.Models;
+using SearchFight.Search;
 using Newtonsoft.Json;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace ORevillaSearchFight.Engines.Google
+namespace SearchFight.Engines.Google
 {
     [SearchEngineMetadata("Google")]
     public class GoogleCustomSearchEngine : ISearchEngine

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ORevillaSearchFight.Engines.Google.Models
+namespace SearchFight.Engines.Google.Models
 {
     public class GoogleCustomSearchResponse
     {

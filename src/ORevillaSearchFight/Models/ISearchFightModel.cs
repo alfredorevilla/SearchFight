@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ORevillaSearchFight.Views.Models;
+using SearchFight.Views.Models;
 
-namespace ORevillaSearchFight.Models
+namespace SearchFight.Models
 {
     public interface ISearchFightModel
     {
-        bool TryValidateTerms(string[] terms, out string[] validationErrors);
-
         ModelTermSearchResult[] GetTermSearchResults(string[] terms);
+
+        bool TryValidateTerms(string[] terms, out string[] validationErrors);
     }
 }

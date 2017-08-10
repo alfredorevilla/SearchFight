@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "ORevillaSearchFight": {
+    "SearchFight": {
       "commandName": "Project",
       "commandLineArgs": ".net java"
     }

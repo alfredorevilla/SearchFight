@@ -1,5 +1,5 @@
-﻿using ORevillaSearchFight.Models.Implementations;
-using ORevillaSearchFight.Search;
+﻿using SearchFight.Models.Implementations;
+using SearchFight.Search;
 using FakeItEasy;
 using FluentAssertions;
 using System;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Xunit;
 
-namespace ORevillaSearchFight.Tests
+namespace SearchFight.Tests
 {
     public class SearchFightModelTests
     {

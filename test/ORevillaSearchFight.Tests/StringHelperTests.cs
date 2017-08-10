@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace ORevillaSearchFight.Tests
+namespace SearchFight.Tests
 {
     public class StringHelperTests
     {

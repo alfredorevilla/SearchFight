@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
-using ORevillaSearchFight.Views;
-using ORevillaSearchFight.Models;
-using ORevillaSearchFight.Presenters;
-using ORevillaSearchFight.Views.Implementations;
-using ORevillaSearchFight.Search;
-using ORevillaSearchFight.Services;
-using ORevillaSearchFight.Services.Implementations;
-using ORevillaSearchFight.Models.Implementations;
+using SearchFight.Views;
+using SearchFight.Models;
+using SearchFight.Presenters;
+using SearchFight.Views.Implementations;
+using SearchFight.Search;
+using SearchFight.Services;
+using SearchFight.Services.Implementations;
+using SearchFight.Models.Implementations;
 
-namespace ORevillaSearchFight
+namespace SearchFight
 {
     public class Program
     {

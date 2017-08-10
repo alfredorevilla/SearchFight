@@ -1,6 +1,6 @@
-﻿using ORevillaSearchFight.Views.Models;
+﻿using SearchFight.Views.Models;
 
-namespace ORevillaSearchFight.Views
+namespace SearchFight.Views
 {
     public interface ISearchFightView
     {

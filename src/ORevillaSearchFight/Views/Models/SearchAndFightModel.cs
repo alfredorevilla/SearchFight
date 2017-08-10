@@ -1,4 +1,5 @@
-﻿namespace ORevillaSearchFight.Views.Models {
+﻿namespace SearchFight.Views.Models {
+
     /// <summary>
     /// Extensive model
     /// </summary>

@@ -1,13 +1,13 @@
 ﻿using FluentAssertions;
-using ORevillaSearchFight.Search;
-using ORevillaSearchFight.Engines.Google;
+using SearchFight.Search;
+using SearchFight.Engines.Google;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace ORevillaSearchFight.Tests
+namespace SearchFight.Tests
 {
     public class GoogleCustomSearchEngineTests
     {

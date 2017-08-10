@@ -1,18 +1,20 @@
-﻿using ORevillaSearchFight.Search;
-using ORevillaSearchFight.Views.Models;
+﻿using SearchFight.Search;
+using SearchFight.Views.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ORevillaSearchFight.Models.Implementations {
+namespace SearchFight.Models.Implementations {
+
     public class SearchFightModel : ISearchFightModel {
-        public SearchFightModel(IEnumerable<ISearchEngine> engines) {
+        public ISearchEngine[] _engines;
+
+        public SearchFightModel(IEnumerable<ISearchEngine> engines)
+        {
             this._engines = engines.ToArray();
         }
-
-        public ISearchEngine[] _engines;
 
         public ModelTermSearchResult[] GetTermSearchResults(string[] terms) {
             var array = new ModelTermSearchResult[terms.Length * this._engines.Length];

@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using ORevillaSearchFight.Search;
+using SearchFight.Search;
 using FakeItEasy;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Xunit;
 using System.Reflection;
 
-namespace ORevillaSearchFight.Tests
+namespace SearchFight.Tests
 {
     public class SearchEngineExtensionsTests
     {

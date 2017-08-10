@@ -1,9 +1,9 @@
-﻿using ORevillaSearchFight.Engines.Microsoft;
-using ORevillaSearchFight.Search;
+﻿using SearchFight.Engines.Microsoft;
+using SearchFight.Search;
 using FluentAssertions;
 using Xunit;
 
-namespace ORevillaSearchFight.Tests
+namespace SearchFight.Tests
 {
     public class BingSearchEngineTests
     {

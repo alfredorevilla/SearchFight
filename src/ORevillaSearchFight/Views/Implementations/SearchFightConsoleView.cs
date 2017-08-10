@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Linq;
-using ORevillaSearchFight.Views.Models;
+using SearchFight.Views.Models;
 
-namespace ORevillaSearchFight.Views.Implementations {
+namespace SearchFight.Views.Implementations {
+
     public class SearchFightConsoleView : ISearchFightView {
 
         public ConsoleColor BackgroundColor {

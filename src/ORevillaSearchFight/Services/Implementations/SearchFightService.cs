@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ORevillaSearchFight.Models;
+using SearchFight.Models;
 
-namespace ORevillaSearchFight.Services.Implementations
+namespace SearchFight.Services.Implementations
 {
     public class SearchFightService : ISearchFightService
     {

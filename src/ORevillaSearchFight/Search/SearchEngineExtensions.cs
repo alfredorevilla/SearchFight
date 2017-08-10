@@ -1,4 +1,4 @@
-﻿using ORevillaSearchFight.Search;
+﻿using SearchFight.Search;
 using System;
 using System.Collections;
 using System.Collections.Concurrent;
@@ -7,24 +7,12 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace ORevillaSearchFight.Search
+namespace SearchFight.Search
 {
     public static class SearchEngineExtensions
     {
-        /// <summary>
-        /// Returns total number of search results found by the engine or service in a synchronius manner
-        /// </summary>
-        /// <param name="term"></param>
-        /// <returns></returns>
-        public static long GetSearchTotalCount(this ISearchEngine engine, string term)
-        {
-            return engine.GetSearchTotalCountAsync(term).Result;
-        }
-
         //  global cache
         private static Dictionary<Type, string> _names = new Dictionary<Type, string>();
-
-        //static ConcurrentDictionary<Type,string>
 
         /// <summary>
         /// Get the name for the specified engine.
@@ -48,5 +36,17 @@ namespace ORevillaSearchFight.Search
             }
             return _names[t];
         }
+
+        /// <summary>
+        /// Returns total number of search results found by the engine or service in a synchronius manner
+        /// </summary>
+        /// <param name="term"></param>
+        /// <returns></returns>
+        public static long GetSearchTotalCount(this ISearchEngine engine, string term)
+        {
+            return engine.GetSearchTotalCountAsync(term).Result;
+        }
+
+        //static ConcurrentDictionary<Type,string>
     }
 }

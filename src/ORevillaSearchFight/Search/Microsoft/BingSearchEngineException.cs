@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace ORevillaSearchFight.Engines.Microsoft
+namespace SearchFight.Engines.Microsoft
 {
     public class BingSearchEngineException : Exception
     {

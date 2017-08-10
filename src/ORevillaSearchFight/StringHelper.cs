@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace ORevillaSearchFight
+namespace SearchFight
 {
     /// <summary>
     /// Just a <seealso cref="System.String"/> helper. We may move this to an extension method.

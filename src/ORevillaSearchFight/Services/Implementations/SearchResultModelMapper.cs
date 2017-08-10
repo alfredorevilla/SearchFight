@@ -1,11 +1,11 @@
-﻿using ORevillaSearchFight.Models;
-using ORevillaSearchFight.Views.Models;
+﻿using SearchFight.Models;
+using SearchFight.Views.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ORevillaSearchFight.Services.Implementations
+namespace SearchFight.Services.Implementations
 {
     public class SearchResultModelMapper : ISearchResultModelMapper
     {

@@ -1,14 +1,14 @@
 ﻿using FluentAssertions;
-using ORevillaSearchFight.Models;
+using SearchFight.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
-using ORevillaSearchFight.Services;
-using ORevillaSearchFight.Services.Implementations;
+using SearchFight.Services;
+using SearchFight.Services.Implementations;
 
-namespace ORevillaSearchFight.Tests
+namespace SearchFight.Tests
 {
     public class SearchFightServiceTests
     {
