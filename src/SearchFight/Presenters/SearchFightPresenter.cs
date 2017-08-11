@@ -7,7 +7,6 @@ using SearchFight.Views;
 
 namespace SearchFight.Presenters
 {
-
     public class SearchFightPresenter
     {
         private ILogger<SearchFightPresenter> _logger;

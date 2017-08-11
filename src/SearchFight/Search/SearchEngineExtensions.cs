@@ -22,7 +22,7 @@ namespace SearchFight.Search
         /// <returns></returns>
         public static string GetName<T>(this T engine) where T : ISearchEngine
         {
-            var t = engine.GetType();// typeof(T);
+            var t = engine.GetType();
             if (!_names.ContainsKey(t))
             {
                 lock (((ICollection)_names).SyncRoot)
@@ -46,7 +46,5 @@ namespace SearchFight.Search
         {
             return engine.GetSearchTotalCountAsync(term).Result;
         }
-
-        //static ConcurrentDictionary<Type,string>
     }
 }
